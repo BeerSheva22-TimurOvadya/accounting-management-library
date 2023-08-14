@@ -24,7 +24,7 @@ public class AccountProviderImpl implements AccountProvider {
 		if (Files.exists(Path.of(fileName))) {
 			try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(fileName))) {
 				res = (List<Account>) stream.readObject();
-			log.info("Accounts have deen restored from the file{}", fileName);
+			log.info("Accounts have deen restored from the file {}", fileName);
 			} catch (Exception e) {				
 				throw new RuntimeException(String.format
 						("Error %s during restoring from file %s", e.toString(), fileName));

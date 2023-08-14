@@ -25,7 +25,6 @@ public class PasswordValidatorImpl implements PasswordValidator {
 				flLower = flLower || symbol.matches("[a-z]");
 				flDigit = flDigit || symbol.matches("\\d");
 			}
-
 		}
 		message = res ? getMessage(flCapital, flLower, flDigit) : "password may contain only letters, digits, point, underscore";
 		if(!message.isEmpty()) {
