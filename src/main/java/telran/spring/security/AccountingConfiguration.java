@@ -9,8 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-@Configuration
+import lombok.extern.slf4j.Slf4j;
 
+@Configuration
+@Slf4j
 public class AccountingConfiguration {
 	@Value("${app.security.admin.password}")
 	String adminPassword;
@@ -25,6 +27,8 @@ public class AccountingConfiguration {
 	@Bean
 	UserDetailsManager getUserDetailsService() {
 		UserDetailsManager manager = new InMemoryUserDetailsManager();
+		
+		log.debug("admin username {}",adminUsername);		
 		manager.createUser(User.withUsername(adminUsername).password(getPasswordEncoder().encode(adminPassword))
 				.roles("ADMIN").build());
 		return manager;
