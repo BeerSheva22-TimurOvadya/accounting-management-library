@@ -16,8 +16,7 @@ final AccountService accountService;
 final PasswordValidator passwordValidator;
 	@Override
 	@GetMapping("{username}")
-	public Account getAccount(@PathVariable String username) {
-		
+	public Account getAccount(@PathVariable String username) {		
 		return accountService.getAccount(username);
 	}
 
