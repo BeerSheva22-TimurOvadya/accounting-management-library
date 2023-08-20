@@ -57,8 +57,7 @@ class AccountServiceMock implements AccountService {
 
 }
 
-@WebMvcTest({ AccountController.class, PasswordValidatorImpl.class, AccountServiceMock.class,
-		SecurityConfiguration.class })
+@WebMvcTest({ AccountController.class, PasswordValidatorImpl.class, AccountServiceMock.class, SecurityConfiguration.class })
 @WithMockUser(password = "ddd", username = "admin", roles = { "ADMIN" })
 public class AccountingControllerTest {
 	@Autowired

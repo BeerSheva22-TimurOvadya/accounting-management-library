@@ -14,9 +14,8 @@ import java.nio.file.Path;
 @Service
 @Slf4j
 public class AccountProviderImpl implements AccountProvider {
-	@Value("${app.security.accounts.file.name:accounts.data}")
+ @Value("${app.accounts.file.name:accounts.data}")
 	private String fileName;
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Account> getAccounts() {
@@ -24,11 +23,11 @@ public class AccountProviderImpl implements AccountProvider {
 		if (Files.exists(Path.of(fileName))) {
 			try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(fileName))) {
 				res = (List<Account>) stream.readObject();
-			log.info("Accounts have deen restored from the file {}", fileName);
-			} catch (Exception e) {				
+				log.info("accounts have been restored from the file {}", fileName);
+			} catch (Exception e) {
 				throw new RuntimeException(String.format
-						("Error %s during restoring from file %s", e.toString(), fileName));
-			}
+						("error %s during restoring from file %s", e.toString(), fileName));
+			} 
 		}
 		return res;
 	}
@@ -37,12 +36,14 @@ public class AccountProviderImpl implements AccountProvider {
 	public void setAccounts(List<Account> accounts) {
 		try(ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(fileName))){
 			stream.writeObject(accounts);
-			log.info("{} accounts have deen saved from the file {}", accounts.size(), fileName );
+			log.info(" {} accounts have been saved to the file {}", accounts.size(),fileName);
 		}catch (Exception e) {
 			throw new RuntimeException(String.format
-					("Error %s during saving to file %s", e.toString(), fileName));
+					("error %s during saving to file %s", e.toString(), fileName));
 		}
-
+		
 	}
+
+	
 
 }
